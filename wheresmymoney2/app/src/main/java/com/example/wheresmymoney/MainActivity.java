@@ -1,6 +1,7 @@
 package com.example.wheresmymoney;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         increase = (Button) findViewById(R.id.increase);
         output = (TextView) findViewById(R.id.output);
     }
-    public void clicked(){
+    public void clicked(View v){
         int currentNumber = Integer.parseInt(output.getText().toString());
         output.setText(currentNumber + 1 +  "");
     }
