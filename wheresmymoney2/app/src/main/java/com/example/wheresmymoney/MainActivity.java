@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.time.Instant;
@@ -18,10 +19,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
     TextView output;
     Button addSpending;
-    Database DB;
+    Database DB = new Database();
+    EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +41,19 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);*/
         addSpending = (Button) findViewById(R.id.AddSpending);
         output = (TextView) findViewById(R.id.output);
+        editText = (EditText) findViewById(R.id.editText);
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void makeSpending(View v){
-        int spendingAmount = Integer.parseInt(output.getText().toString());
+        output.setText(editText.getText().toString());
+        // float spendingAmount = Float.parseFloat(editText.getText().toString());
+
         Date newdate = Date.from(Instant.now());
         // Category category = something
-        DB.MakeSpending(spendingAmount, newdate, DB.Categories.get(0));
-        output.setText(DB.Spendings.get(0).amount + DB.Spendings.get(0).date.toString() + DB.Spendings.get(0).category.name +"");
+        // DB.MakeSpending(spendingAmount, newdate, DB.Categories.get(0));
+        // output.setText(DB.Spendings.get(0).amount + DB.Spendings.get(0).date.toString() + DB.Spendings.get(0).category.name +"");
     }
 
+    private class TextEdit {
+    }
 }
