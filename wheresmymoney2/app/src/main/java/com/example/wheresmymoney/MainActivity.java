@@ -1,12 +1,17 @@
 package com.example.wheresmymoney;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.time.Instant;
+import java.util.Date;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -15,7 +20,8 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
     TextView output;
-    Button increase;
+    Button addSpending;
+    Database DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +36,16 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);*/
-        increase = (Button) findViewById(R.id.increase);
+        addSpending = (Button) findViewById(R.id.AddSpending);
         output = (TextView) findViewById(R.id.output);
     }
-    public void clicked(View v){
-        int currentNumber = Integer.parseInt(output.getText().toString());
-        output.setText(currentNumber + 1 +  "");
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void makeSpending(View v){
+        int spendingAmount = Integer.parseInt(output.getText().toString());
+        Date newdate = Date.from(Instant.now());
+        // Category category = something
+        DB.MakeSpending(spendingAmount, newdate, DB.Categories.get(0));
+        output.setText(DB.Spendings.get(0).amount + DB.Spendings.get(0).date.toString() + DB.Spendings.get(0).category.name +"");
     }
 
 }

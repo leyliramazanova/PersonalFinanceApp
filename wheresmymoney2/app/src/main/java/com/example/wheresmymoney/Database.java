@@ -20,8 +20,8 @@ public class Database {
     private String defaultCategoryName = "uncategorized";
     float spendingsLimit;
     float totalSpendings;
-    List<Spending> Spendings = new ArrayList<Spending>();
-    List<Category> Categories = new ArrayList<Category>();
+    public List<Spending> Spendings = new ArrayList<Spending>();
+    public List<Category> Categories = new ArrayList<Category>();
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -44,19 +44,19 @@ public class Database {
         spnd.description = desc;
     }
 
-    private void MakeSpending(float amt, Date dt, Category cat){
+    public void MakeSpending(float amt, Date dt, Category cat){
         Spending newSpnd = new Spending(amt, dt, cat);
         Spendings.add(newSpnd);
         totalSpendings += amt;
     }
 
-    private void MakeSpending(float amt, Date dt, Category cat, String desc){
+    public void MakeSpending(float amt, Date dt, Category cat, String desc){
         Spending newSpnd = new Spending(amt, dt, cat, desc);
         Spendings.add(newSpnd);
         totalSpendings += amt;
     }
 
-    private void MakeCategory(String name, Color col){
+    public void MakeCategory(String name, Color col){
         // If the category name is already in the Categories List, give an error
         Category category = new Category(name, col);
         Categories.add(category);
