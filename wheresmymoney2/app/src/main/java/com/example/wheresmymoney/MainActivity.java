@@ -46,12 +46,12 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void makeSpending(View v){
         output.setText(editText.getText().toString());
-        // float spendingAmount = Float.parseFloat(editText.getText().toString());
+        float spendingAmount = Float.parseFloat(editText.getText().toString());
 
         Date newdate = Date.from(Instant.now());
-        // Category category = something
-        // DB.MakeSpending(spendingAmount, newdate, DB.Categories.get(0));
-        // output.setText(DB.Spendings.get(0).amount + DB.Spendings.get(0).date.toString() + DB.Spendings.get(0).category.name +"");
+        //Category category =
+        DB.MakeSpending(spendingAmount, newdate, DB.Categories.get(0));
+        //output.setText(DB.Spendings.get(0).amount + DB.Spendings.get(0).date.toString() + DB.Spendings.get(0).category.name +"");
     }
 
     private class TextEdit {
