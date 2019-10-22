@@ -21,7 +21,7 @@
         app:menu="@menu/bottom_nav_menu" />
 
     <fragment
-        android:id="@+id/fragment"
+        android:id="@+id/fragment5"
         android:name="com.example.wheresmymoney.makeCategoryOrSpending"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
