@@ -14,10 +14,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+//import androidx.navigation.ui.AppBarConfiguration;
+//import androidx.navigation.ui.NavigationUI;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         DB.MakeSpending(spendingAmount, newdate, DB.Categories.get(0));
         //output.setText(DB.Spendings.get(0).amount + DB.Spendings.get(0).date.toString() + DB.Spendings.get(0).category.name +"");
     }
+
 
     private class TextEdit {
     }

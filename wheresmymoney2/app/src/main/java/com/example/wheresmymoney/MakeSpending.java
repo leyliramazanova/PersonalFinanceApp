@@ -21,14 +21,14 @@ import java.util.Date;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class makeSpending extends Fragment {
+public class MakeSpending extends Fragment {
     TextView output;
     Button addSpending;
     Database DB = new Database();
     EditText editText;
 
 
-    public makeSpending() {
+    public MakeSpending() {
         // Required empty public constructor
     }
 
