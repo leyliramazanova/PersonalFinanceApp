@@ -23,7 +23,6 @@ public class NewProductActivity extends Activity {
     // Progress Dialog
     private ProgressDialog pDialog;
 
-
     JSONParser jsonParser = new com.example.databasetest.JSONParser();
     EditText inputName;
     EditText inputPrice;
@@ -95,9 +94,9 @@ public class NewProductActivity extends Activity {
             params.add(new BasicNameValuePair("price", price));
             params.add(new BasicNameValuePair("description", description));
 
-
             Log.d("NEWPRODUCT", params.toString());
             Log.d("NEWPRODUCT", url_create_product);
+
             // getting JSON Object
             // Note that create product url accepts POST method
             JSONObject json = jsonParser.makeHttpRequest(url_create_product,
