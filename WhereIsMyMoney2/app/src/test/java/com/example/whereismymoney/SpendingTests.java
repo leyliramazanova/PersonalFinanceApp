@@ -36,7 +36,7 @@ public class SpendingTests {
     public void testGetAmount() {
         float resAmount = ins.getAmount();
         float realAmount = spendingAmount;
-        assertEquals(resAmount, realAmount);
+        assertEquals(resAmount, realAmount, 2);
     }
 
     @Test

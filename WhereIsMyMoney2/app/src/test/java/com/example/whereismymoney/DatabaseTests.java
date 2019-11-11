@@ -1,6 +1,7 @@
 package com.example.whereismymoney;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import org.junit.After;
 import org.junit.Before;
@@ -47,14 +48,16 @@ public class DatabaseTests {
     public void testUpdateSpendingAmount() {
         ins.UpdateSpendingAmount(firstSpending, newSpendingAmount);
         float res = firstSpending.amount;
-        assertEquals(res, newSpendingAmount);
+        assertEquals(res, newSpendingAmount, 2);
     }
 
     @Test
     public void testMakeSpending() {
+        ins.Spendings.clear();
+        ins.totalSpendings = 0f;
         ins.MakeSpending(spendingAmount, spendingDate, spendingCategory);
-        assertEquals(ins.Spendings.size(), 1);
-        assertEquals(ins.totalSpendings, ins.Spendings.get(0));
+        assertEquals(1, ins.Spendings.size());
+        assertEquals(ins.totalSpendings, ins.Spendings.get(0).amount,2);
     }
 
     @Test
@@ -67,17 +70,19 @@ public class DatabaseTests {
     @Test
     public void testUpdateSpendingsLimit() {
         ins.UpdateSpendingsLimit(newSpendingsLimit);
-        assertEquals(ins.spendingsLimit, newSpendingsLimit);
+        assertEquals(ins.spendingsLimit, newSpendingsLimit, 2);
     }
 
     @Test
     public void testReturnSpendingsInCategory() {
+        ins.Spendings.clear();
+        ins.Categories.clear();
         ins.MakeSpending(spendingAmount, spendingDate, spendingCategory);
         ins.MakeSpending(newSpendingAmount, spendingDate, spendingCategory);
         List<Spending> res = ins.ReturnSpendingsInCategory(spendingCategory);
         assertEquals(res.size(), 2);
-        assertEquals(res.get(0).amount, spendingAmount);
-        assertEquals(res.get(1).amount, newSpendingAmount);
+        assertEquals(res.get(0).amount, spendingAmount, 2);
+        assertEquals(res.get(1).amount, newSpendingAmount,2);
     }
 
     @Test
@@ -85,16 +90,6 @@ public class DatabaseTests {
         ins.MakeSpending(spendingAmount, spendingDate, spendingCategory);
         ins.MakeSpending(newSpendingAmount, spendingDate, spendingCategory);
         float res = ins.SumOfSpendingsInCategory(spendingCategory);
-        assertEquals(res, spendingAmount+newSpendingAmount);
-    }
-
-    @Test
-    public void testGetCategoryColors() {
-        ins.MakeCategory(categoryName, categoryColor);
-        ins.MakeCategory(otherCategoryName, otherCategoryColor);
-        int[] res = ins.getCategoryColors();
-        assertEquals(res.length, 2);
-        assertEquals(res[0], categoryColor.toArgb());
-        assertEquals(res[1], otherCategoryColor.toArgb());
+        assertEquals(res, spendingAmount+newSpendingAmount, 2);
     }
 }
