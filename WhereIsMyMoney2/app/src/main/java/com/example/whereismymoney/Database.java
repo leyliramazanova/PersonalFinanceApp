@@ -10,6 +10,9 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.widget.ListAdapter;
+import android.widget.SimpleAdapter;
+
 import androidx.annotation.RequiresApi;
 
 import org.apache.http.NameValuePair;
@@ -65,7 +68,7 @@ public class Database {
     JSONArray spendings = null;
 
     ArrayList<HashMap<String, String>> categoriesList;
-    ArrayList<HashMap<String, String>> spendingsList;
+    public ArrayList<HashMap<String, String>> spendingsList;
 
     /**
      * This is a default category if the user chooses not to create any categories
@@ -127,8 +130,8 @@ public class Database {
      * @param spnd The spending object that needs to be altered
      * @param cat The category object to which the user wants to add the spending
      */
-    private void UpdateSpendingCategory(Spending spnd, Category cat){
-        spnd.AssignCategory(cat);
+    public void UpdateSpendingCategory(Spending spnd, Category cat){
+        spnd.category = cat;
         Spendings.add(spnd);
     }
 
@@ -142,7 +145,7 @@ public class Database {
      * @param spnd The spending object that needs to be changed
      * @param amt A number that will be the new amount in the spending object
      */
-    private void UpdateSpendingAmount(Spending spnd, float amt){
+    public void UpdateSpendingAmount(Spending spnd, float amt){
         spnd.amount = amt;
         totalSpendings += amt;
     }
@@ -157,7 +160,7 @@ public class Database {
      * @param spnd The spending object that needs to be changed
      * @param desc A description that will be added to the spending object
      */
-    private void UpdateSpendingDescription(Spending spnd, String desc){
+    public void UpdateSpendingDescription(Spending spnd, String desc){
         spnd.description = desc;
     }
 
@@ -174,7 +177,6 @@ public class Database {
      */
     public void MakeSpending(float amt, Date dt, Category cat){
         Spending newSpnd = new Spending(amt, dt, cat);
-        System.out.println(newSpnd.date.toString());
         this.Spendings.add(newSpnd);
         this.totalSpendings += amt;
     }
@@ -220,7 +222,7 @@ public class Database {
      *
      * @param amt This is the amount that is the spending limit.
      */
-    private void UpdateSpendingsLimit(float amt){
+    public void UpdateSpendingsLimit(float amt){
         spendingsLimit = amt;
     }
 
@@ -234,7 +236,7 @@ public class Database {
      * @param cat This is the category object from which we want to see all spendings
      * @return A list of spendings in a given category
      */
-    private List<Spending> ReturnSpendingsInCategory(Category cat){
+    public List<Spending> ReturnSpendingsInCategory(Category cat){
         List<Spending> returnList = new ArrayList<Spending>();
         for (Spending spd : Spendings){
             if (spd.compareTo(cat) == 0){
@@ -417,7 +419,6 @@ public class Database {
                         String date = s.getString("created_at");
 
 
-
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<String, String>();
 
@@ -433,6 +434,7 @@ public class Database {
 
                         // adding HashList to ArrayList
                         spendingsList.add(map);
+
                     }
                 }
             } catch (JSONException e) {
@@ -440,6 +442,8 @@ public class Database {
             }
             return null;
         }
+
+
 
     }
 
